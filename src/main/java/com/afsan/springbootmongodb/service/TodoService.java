@@ -40,7 +40,7 @@ public class TodoService {
 
     public TodoDTO getSingleTodo(String id) throws TodoCollectionException {
         Optional<TodoDTO> todoDTOOptional = todoRepo.findById(id);
-        if(todoDTOOptional.isEmpty()){
+        if(!todoDTOOptional.isPresent()){
             throw new TodoCollectionException(TodoCollectionException.NotFoundException(id));
         }else
             return todoDTOOptional.get();
@@ -66,7 +66,7 @@ public class TodoService {
 
     public void deleteTodoById(String id) throws TodoCollectionException{
         Optional<TodoDTO> todoDTOOptional  = todoRepo.findById(id);
-        if(todoDTOOptional.isEmpty()){
+        if(!todoDTOOptional.isPresent()){
             throw new TodoCollectionException(TodoCollectionException.NotFoundException(id));
         }else{
             todoRepo.deleteById(id);
